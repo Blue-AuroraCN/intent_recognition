@@ -1,0 +1,342 @@
+{
+    "original_size": 24683,
+    "cleaned_size": 20033,
+    "duplicate_rows": 4649,
+    "duplicate_monologues": 4649,
+    "missing_values": {
+        "topic": 0,
+        "background": 0,
+        "monologue": 2490
+    },
+    "topic_counts": {
+        "Socializing": 4983,
+        "Other": 4942,
+        "Commuting": 4938,
+        "Studying": 4925,
+        "Dining": 4895
+    },
+    "text_length_stats": {
+        "count": 24683.0,
+        "mean": 275.78981485232754,
+        "std": 102.41666518121832,
+        "min": 0.0,
+        "25%": 264.0,
+        "50%": 294.0,
+        "75%": 328.0,
+        "max": 567.0
+    },
+    "most_common_words": [
+        [
+            "feel",
+            10643
+        ],
+        [
+            "like",
+            8845
+        ],
+        [
+            "without",
+            7198
+        ],
+        [
+            "home",
+            6184
+        ],
+        [
+            "constantly",
+            5055
+        ],
+        [
+            "every",
+            4890
+        ],
+        [
+            "time",
+            4648
+        ],
+        [
+            "academic",
+            4251
+        ],
+        [
+            "food",
+            3936
+        ],
+        [
+            "feeling",
+            3821
+        ],
+        [
+            "social",
+            3780
+        ],
+        [
+            "cultural",
+            3552
+        ],
+        [
+            "make",
+            3463
+        ],
+        [
+            "always",
+            3215
+        ],
+        [
+            "research",
+            3171
+        ],
+        [
+            "different",
+            3143
+        ],
+        [
+            "health",
+            3037
+        ],
+        [
+            "day",
+            2965
+        ],
+        [
+            "afford",
+            2963
+        ],
+        [
+            "friends",
+            2887
+        ]
+    ],
+    "background_stats": {
+        "degree": {
+            "PhD Student": 9024,
+            "Undergraduate": 7855,
+            "Master's Student": 7804
+        },
+        "personality": {
+            "Extroverted": 12990,
+            "Introverted": 11693
+        },
+        "country": {
+            "United Kingdom": 8260,
+            "Australia": 8244,
+            "United States": 8179
+        },
+        "financial_status": {
+            "Comfortable": 12459,
+            "Strained": 12224
+        }
+    },
+    "topic_word_stats": {
+        "Studying": [
+            [
+                "academic",
+                3175
+            ],
+            [
+                "like",
+                1791
+            ],
+            [
+                "without",
+                1712
+            ],
+            [
+                "research",
+                1706
+            ],
+            [
+                "feel",
+                1630
+            ],
+            [
+                "supervisor",
+                1331
+            ],
+            [
+                "struggling",
+                1300
+            ],
+            [
+                "constantly",
+                1236
+            ],
+            [
+                "work",
+                1093
+            ],
+            [
+                "home",
+                1034
+            ]
+        ],
+        "Socializing": [
+            [
+                "feel",
+                3311
+            ],
+            [
+                "social",
+                2801
+            ],
+            [
+                "like",
+                2646
+            ],
+            [
+                "friends",
+                1931
+            ],
+            [
+                "connections",
+                1692
+            ],
+            [
+                "always",
+                1606
+            ],
+            [
+                "cultural",
+                1348
+            ],
+            [
+                "without",
+                1290
+            ],
+            [
+                "make",
+                1178
+            ],
+            [
+                "invited",
+                1136
+            ]
+        ],
+        "Commuting": [
+            [
+                "every",
+                2404
+            ],
+            [
+                "feel",
+                2245
+            ],
+            [
+                "day",
+                2211
+            ],
+            [
+                "campus",
+                2182
+            ],
+            [
+                "transportation",
+                1622
+            ],
+            [
+                "commute",
+                1491
+            ],
+            [
+                "constantly",
+                1447
+            ],
+            [
+                "anxiety",
+                1372
+            ],
+            [
+                "daily",
+                1290
+            ],
+            [
+                "like",
+                1239
+            ]
+        ],
+        "Other": [
+            [
+                "home",
+                1950
+            ],
+            [
+                "feel",
+                1923
+            ],
+            [
+                "like",
+                1724
+            ],
+            [
+                "without",
+                1571
+            ],
+            [
+                "family",
+                1520
+            ],
+            [
+                "health",
+                1368
+            ],
+            [
+                "visa",
+                1017
+            ],
+            [
+                "country",
+                1008
+            ],
+            [
+                "constantly",
+                975
+            ],
+            [
+                "identity",
+                941
+            ]
+        ],
+        "Dining": [
+            [
+                "food",
+                3896
+            ],
+            [
+                "meals",
+                1662
+            ],
+            [
+                "home",
+                1659
+            ],
+            [
+                "without",
+                1647
+            ],
+            [
+                "feel",
+                1534
+            ],
+            [
+                "afford",
+                1460
+            ],
+            [
+                "like",
+                1445
+            ],
+            [
+                "eat",
+                1417
+            ],
+            [
+                "ingredients",
+                1311
+            ],
+            [
+                "health",
+                1305
+            ]
+        ]
+    }
+}
