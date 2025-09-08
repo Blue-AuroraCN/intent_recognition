@@ -1,8 +1,9 @@
 # International Students Psychological Issues Intent Recognition
 
 ## Updates
-- *Latest update*: Enhanced preprocessing pipeline with duplicate value processing, comprehensive text analysis, background information analysis, and data cleaning
-- *Initial release*: Basic preprocessing pipeline with data loading, statistical analysis, and missing values analysis
+- **Third Update**: Added data encoding functionality using jinaai/jina-embeddings-v2-small-en model to convert text data into vector representations
+- **Second Update**: Enhanced preprocessing pipeline with duplicate value processing, comprehensive text analysis, background information analysis, and data cleaning
+- **First Update**: Basic preprocessing pipeline with data loading, statistical analysis, and missing values analysis
 
 ## Project Overview
 
@@ -18,7 +19,9 @@ The dataset was collected through an online questionnaire survey conducted over 
 .
 ├── data/                    # Contains the dataset files
 ├── data_exploration/        # Outputs from data analysis
+├── outputs/                # Output files from data encoding and model processing
 ├── preprocessing/           # Data preprocessing modules
+├── data_encoder.py          # Data encoding script using jinaai embeddings model
 └── main_preprocessing.py    # Main preprocessing script
 ```
 
@@ -103,8 +106,9 @@ The project classifies psychological issues of international students into the f
 
 ## Current Implementation
 
-The project now includes a comprehensive preprocessing pipeline that performs:
+The project now includes a comprehensive preprocessing and encoding pipeline that performs:
 
+### Preprocessing Pipeline
 1. **Data Loading**: Loads data from JSONL format
 2. **Basic Statistical Analysis**: Provides fundamental insights into the dataset
 3. **Missing Values Analysis**: Identifies and analyzes missing data points
@@ -115,18 +119,39 @@ The project now includes a comprehensive preprocessing pipeline that performs:
 8. **Text Content Analysis**: Identifies common words and patterns in monologues
 9. **Data Cleaning**: Removes missing values and duplicates, saves cleaned dataset
 
+### Data Encoding Pipeline
+1. **Model Loading**: Loads the jinaai/jina-embeddings-v2-small-en model for text encoding
+2. **Text Encoding**: Converts monologue texts into vector representations using the embedding model
+3. **Batch Processing**: Processes texts in batches for efficient encoding
+4. **Output Generation**: Saves encoded data along with labels and metadata in JSONL format
+
+The data encoding functionality is implemented in `data_encoder.py`, which:
+- Uses the jinaai/jina-embeddings-v2-small-en model to create vector representations of text
+- Processes data in batches for efficiency
+- Preserves topic labels and metadata alongside the encoded vectors
+- Outputs the results to the `outputs/encoded_data.jsonl` file
+
 ## Future Work
 
 The project will be expanded to include:
 
-- Text content updates and normalization
-- Feature engineering for model training
+### Completed
+- Text encoding using jinaai/jina-embeddings-v2-small-en model
+
+### In Progress
 - Model training for intent classification
-- Evaluation metrics and performance analysis
+- Model evaluation and performance analysis
+
+### Planned
+- Feature engineering for enhanced model performance
+- Model optimization and hyperparameter tuning
 - Deployment options for practical use
+- Integration with university support systems
+- Real-time intent recognition API development
 
 ## How to Use
 
+### Preprocessing Pipeline
 To run the preprocessing pipeline:
 
 ```bash
@@ -134,6 +159,20 @@ python main_preprocessing.py
 ```
 
 This will execute the current preprocessing steps and save the analysis results in the `data_exploration` directory.
+
+### Data Encoding
+To encode the cleaned data using the jinaai embeddings model:
+
+```bash
+python data_encoder.py
+```
+
+This will:
+1. Load the cleaned data from `data_exploration/cleaned_data.jsonl`
+2. Encode the monologue texts using the jinaai/jina-embeddings-v2-small-en model
+3. Save the encoded data along with labels and metadata to `outputs/encoded_data.jsonl`
+
+Note: The encoding process may take some time depending on the size of your dataset and available computing resources.
 
 ## Project Impact & Significance
 
