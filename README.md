@@ -1,6 +1,7 @@
 # International Students Psychological Issues Intent Recognition
 
 ## Updates
+- **Fourth Update**: Implemented intent recognition model training and evaluation pipeline with logistic regression classifier, achieving 97.68% accuracy
 - **Third Update**: Added data encoding functionality using jinaai/jina-embeddings-v2-small-en model to convert text data into vector representations
 - **Second Update**: Enhanced preprocessing pipeline with duplicate value processing, comprehensive text analysis, background information analysis, and data cleaning
 - **First Update**: Basic preprocessing pipeline with data loading, statistical analysis, and missing values analysis
@@ -20,9 +21,15 @@ The dataset was collected through an online questionnaire survey conducted over 
 ├── data/                    # Contains the dataset files
 ├── data_exploration/        # Outputs from data analysis
 ├── outputs/                # Output files from data encoding and model processing
+│   ├── models/             # Saved models and encoders
+│   ├── results/            # Model evaluation results and visualizations
+│   └── encoded_data.jsonl  # Encoded data with embeddings
 ├── preprocessing/           # Data preprocessing modules
 ├── data_encoder.py          # Data encoding script using jinaai embeddings model
-└── main_preprocessing.py    # Main preprocessing script
+├── main_preprocessing.py    # Main preprocessing script
+├── main_intent_recognition.py # Main intent recognition pipeline
+├── model_training.py        # Model training functionality
+└── model_evaluation.py      # Model evaluation functionality
 ```
 
 ## Data Analysis Results
@@ -106,7 +113,7 @@ The project classifies psychological issues of international students into the f
 
 ## Current Implementation
 
-The project now includes a comprehensive preprocessing and encoding pipeline that performs:
+The project now includes a comprehensive preprocessing, encoding, and intent recognition pipeline that performs:
 
 ### Preprocessing Pipeline
 1. **Data Loading**: Loads data from JSONL format
@@ -131,20 +138,53 @@ The data encoding functionality is implemented in `data_encoder.py`, which:
 - Preserves topic labels and metadata alongside the encoded vectors
 - Outputs the results to the `outputs/encoded_data.jsonl` file
 
+### Model Training Pipeline
+1. **Data Loading**: Loads encoded data from JSONL format
+2. **Data Preparation**: Splits data into training and testing sets, encodes labels
+3. **Model Training**: Trains a logistic regression classifier for intent recognition
+4. **Model Saving**: Saves the trained model and label encoder for future use
+
+The model training functionality is implemented in `model_training.py`, which:
+- Loads encoded data and prepares it for training
+- Uses scikit-learn's LogisticRegression for classification
+- Implements stratified train-test splitting to maintain class distribution
+- Saves the trained model and label encoder to the `outputs/models/` directory
+
+### Model Evaluation Pipeline
+1. **Model Evaluation**: Evaluates the trained model using various metrics
+2. **Results Visualization**: Creates confusion matrix and classification report visualizations
+3. **Results Saving**: Saves evaluation results and visualizations for future reference
+
+The model evaluation functionality is implemented in `model_evaluation.py`, which:
+- Calculates accuracy, precision, recall, and F1 score
+- Generates confusion matrix and classification report visualizations
+- Saves evaluation results to `outputs/results/evaluation_results.json`
+- Saves visualizations as PNG files in the `outputs/results/` directory
+
+### Main Intent Recognition Pipeline
+The `main_intent_recognition.py` file orchestrates the entire process:
+1. Data encoding using the jinaai embeddings model
+2. Model training with logistic regression
+3. Model evaluation and results visualization
+
+This integrated pipeline provides a complete workflow from raw text data to a trained and evaluated intent recognition model.
+
 ## Future Work
 
 The project will be expanded to include:
 
 ### Completed
 - Text encoding using jinaai/jina-embeddings-v2-small-en model
+- Model training for intent classification using logistic regression
+- Model evaluation and performance analysis with visualization
 
 ### In Progress
-- Model training for intent classification
-- Model evaluation and performance analysis
+- None
 
 ### Planned
 - Feature engineering for enhanced model performance
 - Model optimization and hyperparameter tuning
+- Experiment with different classification algorithms (e.g., SVM, Random Forest, Neural Networks)
 - Deployment options for practical use
 - Integration with university support systems
 - Real-time intent recognition API development
@@ -174,6 +214,69 @@ This will:
 
 Note: The encoding process may take some time depending on the size of your dataset and available computing resources.
 
+### Intent Recognition Pipeline
+To run the complete intent recognition pipeline (data encoding, model training, and evaluation):
+
+```bash
+python main_intent_recognition.py
+```
+
+This will:
+1. Encode the data using the jinaai embeddings model (if not already encoded)
+2. Train a logistic regression model for intent classification
+3. Evaluate the model performance and generate visualizations
+4. Save the trained model to `outputs/models/intent_model.pkl`
+5. Save the evaluation results to `outputs/results/evaluation_results.json`
+6. Save visualization images to `outputs/results/`
+
+### Using the Trained Model
+To use the trained model for prediction:
+
+```python
+import numpy as np
+from model_training import load_model
+from data_encoder import encode_text
+
+# Load the trained model and label encoder
+model, label_encoder = load_model('outputs/models')
+
+# Example text to classify
+text = "I'm struggling to make friends in my new university."
+
+# Encode the text
+embedding = encode_text(text)
+
+# Make prediction
+prediction = model.predict([embedding])
+predicted_class = label_encoder.inverse_transform(prediction)[0]
+
+print(f"Predicted intent: {predicted_class}")
+```
+
+Note: You would need to implement the `encode_text` function in `data_encoder.py` to encode individual text samples.
+
+## Model Evaluation Results
+
+The intent recognition model has been evaluated on a test set of 4,007 samples, achieving excellent performance across all intent categories:
+
+### Overall Performance Metrics
+- **Accuracy**: 97.68%
+- **Precision**: 97.68%
+- **Recall**: 97.68%
+- **F1 Score**: 97.68%
+
+### Performance by Intent Category
+- **Commuting**: Precision 99.88%, Recall 99.63%, F1-Score 99.75%
+- **Dining**: Precision 99.75%, Recall 99.75%, F1-Score 99.75%
+- **Other**: Precision 95.82%, Recall 94.86%, F1-Score 95.33%
+- **Socializing**: Precision 96.06%, Recall 97.14%, F1-Score 96.60%
+- **Studying**: Precision 96.86%, Recall 96.98%, F1-Score 96.92%
+
+![Confusion Matrix](outputs/results/confusion_matrix.png)
+![Classification Report](outputs/results/classification_report.png)
+
+The model demonstrates high accuracy across all intent categories, with particularly strong performance for "Commuting" and "Dining" categories. The slightly lower performance for the "Other" category is expected, as this category contains a more diverse range of concerns that may not be as clearly distinguishable.
+
 ## Project Impact & Significance
 
 This project represents an important contribution to understanding and addressing the psychological challenges faced by international students. By systematically categorizing and analyzing these concerns, we aim to:
@@ -184,6 +287,6 @@ This project represents an important contribution to understanding and addressin
 - **Research Contribution**: Provide valuable data for researchers studying cross-cultural psychology and student well-being.
 - **Policy Development**: Inform policy decisions related to international student programs and support services.
 
-The technical expertise demonstrated in this project spans data collection, preprocessing, analysis, and machine learning application to real-world psychological challenges, showcasing a comprehensive approach to solving complex social issues through technology.
+The technical expertise demonstrated in this project spans data collection, preprocessing, analysis, and machine learning application to real-world psychological challenges, showcasing a comprehensive approach to solving complex social issues through technology. The high accuracy of the intent recognition model (97.68%) demonstrates the potential for practical implementation in university support systems.
 
 
